@@ -1,0 +1,11 @@
+Here you can add a description to remmber later on.
+
+sql-- Insert cleaned data into Gold by selecting it from Bronze
+INSERT INTO dw_gold.dim_users (user_id, email, created_at)
+SELECT 
+    id, 
+    LOWER(TRIM(email_address)), -- Cleaning step
+    STR_TO_DATE(signup_date, '%Y-%m-%d') -- Formatting step
+FROM dw_bronze.raw_users
+WHERE email_address IS NOT NULL;
+Use code with caution.
